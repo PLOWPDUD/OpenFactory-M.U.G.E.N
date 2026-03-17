@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LuGrid, LuImage, LuMousePointer2 } from 'react-icons/lu';
+import { LuLayoutGrid, LuImage, LuMousePointer2 } from 'react-icons/lu';
 
 const Canvas: React.FC = () => {
   const [bgChecker, setBgChecker] = useState(true);
@@ -13,7 +13,7 @@ const Canvas: React.FC = () => {
           onClick={() => setBgChecker(!bgChecker)}
           title="Toggle checkerboard background"
         >
-          <LuGrid size={16} />
+          <LuLayoutGrid size={16} />
         </button>
         <button className="p-1.5 rounded hover:bg-[#3a3a3d]" title="Toggle Transparency (8-bit / 32-bit)">
           <LuImage size={16} />
