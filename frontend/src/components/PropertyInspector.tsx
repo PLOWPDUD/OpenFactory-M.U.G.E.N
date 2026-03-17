@@ -80,6 +80,30 @@ const PropertyInspector: React.FC = () => {
           <p>Dimensions: 120 x 140 px</p>
           <p>Palette: Shared</p>
         </div>
+
+        <hr className="border-[#333333]" />
+
+        {/* Project info */}
+        <div>
+          <h3 className="text-gray-500 mb-2 font-medium">Project Settings</h3>
+          <div className="flex items-center justify-between mb-2">
+            <label className="text-gray-400">Target SFF:</label>
+            <select
+              value={useSprite().sffVersion}
+              onChange={e => useSprite().setSffVersion(e.target.value as 'v1' | 'v1.1')}
+              className="bg-[#3c3c3c] text-white w-24 px-1 py-1 rounded outline-none border border-transparent focus:border-blue-500 text-xs"
+            >
+              <option value="v1">MUGEN Beta (v1)</option>
+              <option value="v1.1">MUGEN 1.0 (v1.1)</option>
+            </select>
+          </div>
+          <div className="flex items-center justify-between">
+            <label className="text-gray-400">File:</label>
+            <span className="text-blue-400 cursor-pointer hover:underline text-[10px] truncate max-w-[120px]">
+              character.def
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );
