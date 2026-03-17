@@ -2,10 +2,12 @@ import Sidebar from './components/Sidebar';
 import Canvas from './components/Canvas';
 import CodeEditor from './components/CodeEditor';
 import PropertyInspector from './components/PropertyInspector';
+import { SpriteProvider } from './context/SpriteContext';
 
 function App() {
   return (
-    <div className="h-screen w-screen flex flex-col bg-[#1e1e1e] text-gray-200 overflow-hidden font-sans select-none">
+    <SpriteProvider>
+      <div className="h-screen w-screen flex flex-col bg-[#1e1e1e] text-gray-200 overflow-hidden font-sans select-none">
       {/* Top Menu Bar */}
       <div className="h-8 bg-[#333333] border-b border-[#1e1e1e] flex items-center px-4 text-xs gap-4">
         <span className="font-semibold text-gray-300">OpenFactory-MUGEN</span>
@@ -39,7 +41,8 @@ function App() {
           <span>Palettes: 1</span>
         </div>
       </div>
-    </div>
+      </div>
+    </SpriteProvider>
   );
 }
 

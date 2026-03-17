@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSprite } from '../context/SpriteContext';
 
 const PropertyInspector: React.FC = () => {
-  const [group, setGroup] = useState('0');
-  const [index, setIndex] = useState('0');
-  const [xOffset, setXOffset] = useState('0');
-  const [yOffset, setYOffset] = useState('0');
+  const { selectedSprite, updateOffset, setSelectedSprite } = useSprite();
+
+  const handleIdentityChange = (field: 'group' | 'index', val: string) => {
+    setSelectedSprite({
+      ...selectedSprite,
+      [field]: parseInt(val) || 0
+    });
+  };
+
+  const handleOffsetChange = (field: 'xOffset' | 'yOffset', val: string) => {
+    const num = parseInt(val) || 0;
+    if (field === 'xOffset') updateOffset(num, selectedSprite.yOffset);
+    else updateOffset(selectedSprite.xOffset, num);
+  };
 
   return (
     <div className="w-64 bg-[#252526] border-l border-[#333333] flex flex-col h-full text-sm">
       <div className="p-3 font-semibold text-gray-400 uppercase border-b border-[#333333] tracking-wider">
         Sprite Properties
       </div>
-
+      
       <div className="p-4 flex flex-col gap-4">
         {/* Identity */}
         <div>
@@ -20,8 +31,8 @@ const PropertyInspector: React.FC = () => {
             <label className="text-gray-400">Group:</label>
             <input
               type="number"
-              value={group}
-              onChange={e => setGroup(e.target.value)}
+              value={selectedSprite.group}
+              onChange={e => handleIdentityChange('group', e.target.value)}
               className="bg-[#3c3c3c] text-white w-20 px-2 py-1 rounded outline-none border border-transparent focus:border-blue-500"
             />
           </div>
@@ -29,8 +40,8 @@ const PropertyInspector: React.FC = () => {
             <label className="text-gray-400">Index:</label>
             <input
               type="number"
-              value={index}
-              onChange={e => setIndex(e.target.value)}
+              value={selectedSprite.index}
+              onChange={e => handleIdentityChange('index', e.target.value)}
               className="bg-[#3c3c3c] text-white w-20 px-2 py-1 rounded outline-none border border-transparent focus:border-blue-500"
             />
           </div>
@@ -45,8 +56,8 @@ const PropertyInspector: React.FC = () => {
             <label className="text-gray-400">X Offset:</label>
             <input
               type="number"
-              value={xOffset}
-              onChange={e => setXOffset(e.target.value)}
+              value={selectedSprite.xOffset}
+              onChange={e => handleOffsetChange('xOffset', e.target.value)}
               className="bg-[#3c3c3c] text-white w-20 px-2 py-1 rounded outline-none border border-transparent focus:border-blue-500"
             />
           </div>
@@ -54,8 +65,8 @@ const PropertyInspector: React.FC = () => {
             <label className="text-gray-400">Y Offset:</label>
             <input
               type="number"
-              value={yOffset}
-              onChange={e => setYOffset(e.target.value)}
+              value={selectedSprite.yOffset}
+              onChange={e => handleOffsetChange('yOffset', e.target.value)}
               className="bg-[#3c3c3c] text-white w-20 px-2 py-1 rounded outline-none border border-transparent focus:border-blue-500"
             />
           </div>
